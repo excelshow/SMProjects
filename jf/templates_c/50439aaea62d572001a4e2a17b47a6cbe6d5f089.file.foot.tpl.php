@@ -1,0 +1,47 @@
+<?php /* Smarty version Smarty-3.1.11, created on 2015-03-25 04:09:28
+         compiled from "E:\project\meidian_xml\httpdocs\templates\admin\foot.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:30527551226e88a9ec9-30779904%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '50439aaea62d572001a4e2a17b47a6cbe6d5f089' => 
+    array (
+      0 => 'E:\\project\\meidian_xml\\httpdocs\\templates\\admin\\foot.tpl',
+      1 => 1421823211,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '30527551226e88a9ec9-30779904',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'web_copyrighturl' => 0,
+    'web_copyright' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.11',
+  'unifunc' => 'content_551226e88b1b24_76541324',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_551226e88b1b24_76541324')) {function content_551226e88b1b24_76541324($_smarty_tpl) {?></div> 
+
+	<!-- Footer -->
+<footer class="footer ">
+<div class="container">
+
+
+		<p>&copy; <?php echo date('Y');?>
+ <a href="<?php echo $_smarty_tpl->tpl_vars['web_copyrighturl']->value;?>
+" target="_blank"><?php echo $_smarty_tpl->tpl_vars['web_copyright']->value;?>
+</a>, All Rights Reserved<br />
+ IE7+ & Firefox
+ </p>
+
+
+</div>
+</footer>
+ 
+</body>
+
+</html><?php }} ?>

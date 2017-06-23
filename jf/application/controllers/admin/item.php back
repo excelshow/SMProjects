@@ -1,0 +1,184 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class Item extends CI_Controller {
+
+    function __construct() {
+        parent::__construct();
+
+        $this->load->model('item_model');
+        $this->sysconfig_model->sysInfo(); // set sysInfo 
+        $navAction = "";
+        $this->cismarty->assign("navAction", $navAction);
+    }
+
+    function pagination($linkUrl, $linkModel, $uri_segment, $condition = "") {
+        $this->load->library('pagination');
+        $config['base_url'] = site_url($linkUrl);
+        $config['total_rows'] = $this->item_model->$linkModel($condition);
+        $config['per_page'] = '20';
+        $config['uri_segment'] = $uri_segment;
+        $this->pagination->initialize($config);
+        return $this->pagination->create_links();
+    }
+
+    function index() {
+        // load menu start 
+        $this->authorization->check_auth();
+        $type = $this->uri->segment(4, 0);
+        if ($type > 0) {
+            if ($type == 1) {
+                $where = "settype like '%是%'";
+            } else {
+                $type = 2;
+                $where = "settype like '%否%'";
+            }
+        } else {
+            $type = 0;
+            $where = '';
+        }
+        // load menu end
+        $data['list'] = $this->item_model->get_result(20, $this->uri->segment(5, 0), $where);
+        $linkUrl = "admin/item/index/" . $type;
+        $linkModel = "get_num_rows";
+
+        $uri_segment = 5;
+
+        $data['links'] = $this->pagination($linkUrl, $linkModel, $uri_segment, $where);
+        $reUrl = $this->input->server('HTTP_REFERER');
+        $this->cismarty->assign("type", $type);
+
+        $this->cismarty->assign("data", $data);
+        $this->cismarty->assign("links", $data['links']);
+
+        // exit();
+        $this->cismarty->display('admin/item.tpl');
+    }
+
+    function synxml() {
+        $this->authorization->check_auth();
+
+
+        /////////////
+        $filename = 'meidian.xml';
+        $xmlfile = "" . $filename;
+        // $xmlRaw = file_get_contents($xmlfile);
+        ///
+        $reader = new XMLReader();  //实例化XMLReader 
+        $reader->open($xmlfile); //获取xml 
+        $i = 1;
+        $r = 1;
+        /*  $tree = null;
+          while ($reader->read())
+          switch ($reader->nodeType) {
+          case XMLReader::END_ELEMENT: return $tree;
+          case XMLReader::ELEMENT:
+          $node = array('tag' => $reader->name, 'value' => $reader->isEmptyElement ? '' : synxml());
+          if ($reader->hasAttributes)
+          while ($reader->moveToNextAttribute())
+          $node['attributes'][$reader->name] = $reader->value;
+          $tree[] = $node;
+          break;
+          case XMLReader::TEXT:
+          case XMLReader::CDATA:
+          $tree .= $xml->value;
+          }
+          print_r($tree);
+          exit();
+         * */
+
+        //    var_dump($reader->getAttributeNs("Row"));
+        //    exit();
+//$reader->getAttributeNs("Row");
+        $v = array();
+        while ($reader->read()) {  //是否读取
+            if ($reader->nodeType == XMLReader::ELEMENT) {
+               // echo $reader->localName;
+                if ($reader->localName == 'Data') {
+                    // XMLReader::moveToContent;
+                    $v[$r][] = $reader->readString();
+                    // $array = array_values(array_filter($value));
+                }
+                if ($reader->localName == 'Row') {
+                   
+                    $r++;
+                }
+                // echo $reader->readString() . "<br>";
+            }
+
+            if ($reader->localName == 'Data') {
+                // XMLReader::moveToContent;
+              //  $v[$r][] = $reader->readString();
+                // $array = array_values(array_filter($value));
+            }
+            //  echo $reader->getAttribute('Data');
+            if ($reader->localName == 'Row') {
+                // if ($v[$r]) {
+                //  print_r($v[$r]);
+                //  }
+                //  echo $reader->readString();
+                if ($reader->readString()) {
+                    $temp = $reader->readString();
+                    $value = explode(" ", $temp);
+                    $array = array_values(array_filter($value));
+                    $data['yxarea'] = $array[1];
+                    $data['zznumber'] = $array[2];
+                    $data['zzname'] = $array[3];
+                    $data['mdnumber'] = $array[4];
+                    $data['mdname'] = $array[5];
+                    $data['settype'] = $array[6];
+                    $data['pici'] = $array[7];
+                    // print_r($data);
+                    if ($data['mdnumber'] && $i > 1) {
+                        //  echo $data['mdnumber'];
+                      //  $row = $this->item_model->get_item_row("mdnumber = '" . $data['mdnumber'] . "'");
+
+                        if ($row) {
+                            // update
+                            //  $this->item_model->item_update($data);
+                        } else {
+                            //inter  
+                            //   echo $data['mdnumber'];
+                            //  $this->item_model->item_insert($data);
+                        }
+                    }
+                }
+                // $r++;
+                // echo "<br>";
+            }
+
+            $i++;
+            if ($i % 5000 == 0) {
+                echo "sdf";
+                sleep(5);
+            }
+            //  }
+        }
+         print_r($v);
+        exit();
+
+///////////////////
+        ///
+
+        $this->load->library('simplexml');
+        $filename = '222.xml';
+        $xmlfile = "" . $filename;
+        $xmlRaw = file_get_contents($xmlfile);
+        $xmlData = $this->simplexml->xml_parse($xmlRaw);
+        print_r($xmlData);
+        foreach ($xmlData['item'] as $row) {
+
+            $result .= '<tr>';
+            $result .= '<td>' . $row['id'] . '</td>';
+            $result .= '<td>' . $row['name'] . '</td>';
+            $result .= '<td>' . $row['category'] . '</td>';
+            $result .= '<td>$ ' . $row['price'] . '</td>';
+            $result .= '</tr>';
+        }
+        echo $result;
+        exit();
+    }
+
+}

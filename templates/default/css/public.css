@@ -1,0 +1,98 @@
+#tray {
+   
+    padding:4px;
+}
+.menuTab{
+	
+	background:#F7F7F7;
+	padding:1px;
+	
+	}
+.menuTab ul{
+	padding:0;
+	margin:0;
+	list-style:none;
+	border-bottom:1px solid #666;
+	}
+.menuTab ul li{
+	float:left;
+	margin-right:2px;
+	}
+.menuTab ul li a{
+	display:inline-block;
+	padding:10px 25px;
+	font-size:1.5em;
+	color:#333;	
+	}
+.menuTab ul li a:hover, .menuTab ul .active a{
+	background:#666;
+	color:#FFF;	
+	}
+	
+.searchbox{
+	background:#E6E6E6;
+	padding:20px;
+	text-align:center;
+	}
+.searchNav{
+	margin:0 auto;
+	width:600px;
+	}
+.searchform{
+	border:1px solid #999;
+	background:#FFF;
+	padding:5px;
+	margin-bottom:10px;
+	float:left;
+	text-align:left;
+	}
+.searchform .styleSelect{
+	font-family:微软雅黑, Verdana, Geneva, sans-serif;
+	font-size:14px;
+	border:0;
+	padding:5px;
+	}
+
+.searchform .styleInput{
+	font-family:微软雅黑, Verdana, Geneva, sans-serif;
+	font-size:14px;
+	border:0;
+	width:388px;
+	padding:5px;
+	}
+.searchButton{
+	text-align:left;
+	padding-left:2px;
+	float:left;
+}
+.searchButton .submitButton{
+	font-family:微软雅黑, Verdana, Geneva, sans-serif;
+	font-size:20px;
+	padding:5px 10px;
+	height:43px;
+	border:0;
+	background:#0099ff;
+	color:#FFF;
+}
+.searchButton .submitButton:hover{
+
+	background:#006699;
+	color:#FFF;
+}
+.searchResult{
+	font-size:14px;
+	border-left:1px solid #CCC;
+	padding-left:20px;
+}
+
+.searchResult dl{
+}
+.searchResult dl .resultTitle{
+	display:inline-block;
+	width:60px;
+	color:#666;
+}
+.searchResult dl .resultInfo{
+	display:inline-block;
+	color:#333;
+}

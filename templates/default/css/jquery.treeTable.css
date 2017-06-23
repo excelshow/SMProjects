@@ -1,0 +1,183 @@
+/* jQuery TreeTable Core 2.0 stylesheet
+ *
+ * This file contains styles that are used to display the tree table. Each tree
+ * table is assigned the +treeTable+ class.
+ * ========================================================================= */
+ 
+/* jquery.treeTable.collapsible
+ * ------------------------------------------------------------------------- */
+.treeTable tr td .expander {
+  background-position: left center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  padding: 0;
+  zoom: 1; /* IE7 Hack */
+}
+
+.treeTable tr.collapsed td .expander {
+  background-image: url(../images/treetable/toggle-expand-dark.png);
+}
+
+.treeTable tr.expanded td .expander {
+  background-image: url(../images/treetable/toggle-collapse-dark.png);
+}
+
+/* jquery.treeTable.sortable
+ * ------------------------------------------------------------------------- */
+.treeTable tr.selected, .treeTable tr.accept {
+  background-color: #0099cc;
+  color: #FFF;
+}
+
+.treeTable tr.collapsed.selected td .expander, .treeTable tr.collapsed.accept td .expander {
+  background-image: url(../images/treetable/toggle-expand-light.png);
+}
+
+.treeTable tr.expanded.selected td .expander, .treeTable tr.expanded.accept td .expander {
+  background-image: url(../images/treetable/toggle-collapse-light.png);
+}
+
+.treeTable .ui-draggable-dragging {
+  color: #000;
+  z-index: 1;
+}
+
+/* TABLE
+ * ========================================================================= */
+table {
+  border: 2px solid #888888;
+  border-collapse: collapse;
+  line-height: 1;
+  padding:0;
+  margin:0;
+ /* margin: 1em auto;
+  margin:0 auto;*/
+  width: 100%;
+}
+
+/* Caption
+ * ------------------------------------------------------------------------- */
+table caption {
+  font-size: .9em;
+  font-weight: bold;
+}
+
+/* Header
+ * ------------------------------------------------------------------------- */
+table thead {
+  background: #EEE url(../images/treetable/bg-table-thead.png) repeat-x top left;
+  font-size: 12px; 
+}
+
+table thead tr th {
+  border: 1px solid #888;
+  font-weight: normal;
+  padding: .1em 1.0em .1em .5em;
+  text-align: left;
+  line-height:20px;
+}
+
+/* Body
+ * ------------------------------------------------------------------------- */
+table tbody tr td {
+  cursor: default;
+  padding: .3em .5em;
+  line-height:20px;
+}
+
+table tbody tr.even {
+  background: #f3f3f3;
+}
+
+table tbody tr.odd {
+  background: #fff;
+}
+
+table tbody tr.hover {
+  background: #71B8FF;
+}
+
+/*table span {
+  background-position: center left;
+  background-repeat: no-repeat;
+  padding: .2em 0 .2em 1.5em;
+}
+*/
+table span.file2 {
+  /*background-image: url(../images/treetable/page_white_text.png);*/
+}
+
+table  span.folder2 {
+  background-image: url(../images/treetable/folder.png);/**/
+}
+table  span.file {
+	padding-left:10px;
+  background: url(../images/arrow_right.png) 0 50% no-repeat;/**/
+}
+table  span.folder {
+	padding-left:18px;
+  background: url(../images/arrow_bottom.png) 0 50% no-repeat;/**/
+}
+table  span.root2 {
+ /* background-image: url(../images/treetable/folder.png);*/
+}
+
+table span.optional2 {
+  width:100%;
+  overflow: hidden;white-space: nowrap;-o-text-overflow: ellipsis;text-overflow:
+}
+table  span.sequence2{
+  width:100%;
+}
+ 
+.delete{
+  border:none;
+  cursor:pointer;
+  padding:2px 5px;
+  min-height:22px;
+  min-width:22px;
+  color:#FFF;
+  background: #666 url(../images/action_delete.png) 4px 50% no-repeat;
+}
+.delete:hover{
+ background: #333 url(../images/action_delete.png) 4px 50% no-repeat;
+}
+.disable{
+  border:none;width:36px;height:16px;cursor:pointer;
+  color:#C00;
+  padding:0;
+  margin:0;
+}
+.enabled{
+  border:none;width:36px;height:16px;cursor:pointer;
+  color:#069;
+  padding:0;
+  margin:0;
+}
+
+.add{
+	border:0;
+  cursor:pointer;
+  padding:2px 5px;
+ min-height:22px;
+  min-width:22px;
+  color:#FFF;
+  background:#06F url(../images/action_add.png) 4px 50% no-repeat;
+}
+
+.edit{
+  border:none;
+  cursor:pointer;
+  padding:2px 5px;
+  min-height:22px;
+  min-width:22px;
+  color:#FFF;
+  background: #99cc00 url(../images/action_edit.png) 4px 50% no-repeat;
+}
+.edit:hover{
+ background: #669900 url(../images/action_edit.png) 4px 50% no-repeat;
+}
+.search{
+  border:none;width:16px;height:16px;cursor:pointer;
+  background:url(../images/action_search.png);
+}

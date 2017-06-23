@@ -1,0 +1,138 @@
+@charset "utf-8";
+/* CSS Document */
+.colorG{
+	color:#999;
+}
+.font16{
+	font-size:16px;
+}
+.txStaffList{
+	padding:10px;
+	margin:0;
+	list-style:none;
+	}
+
+.txStaffList li{
+	float:left;
+	list-style:none;
+	display:inline-block;
+	width:120px;
+	height:56px;
+	margin:2px;
+	
+	}
+
+.txStaffList .deptName{
+	font-size:14px;
+	font-weight:bold;
+	padding:6px;
+	background:#F5F5F5;
+	color:#666;
+	height:56px;
+}
+.txStaffList .staffInfo{
+	padding:5px;
+	border:1px solid #89CFA7;
+}
+.txStaffList .staffInfo:hover{
+	border:1px solid #F60;
+	background:#FFF5F0;
+}
+.txStaffList .staffName{
+	font-size:14px;
+	font-weight:bold;
+	color:#030;
+	padding-bottom:4px;
+}
+.txStaffList .staffTel{
+	font-size:12px;
+	color:#333;
+}
+.txStaffList .funShow{
+	position:relative;
+	float:right;
+}
+
+.showStaffList{
+	padding:0;
+	margin:0;
+	list-style:none;
+	border:2px solid #666;
+}
+.showTitle{
+	background:#999;
+	color:#000;
+}
+.showTop{
+	width:33.33%;
+	float:left;
+}
+ 
+.showUltop{
+	padding:5px;
+	margin:0;
+	list-style:none;
+	border-right:1px solid #CCC;
+	border-bottom:1px solid  #CCC;
+	min-height:20px;
+	}
+.showTab1{
+	width:25%;
+	float:left;
+	 
+}
+.showTab2{
+	width:30%;
+	float:left;
+	 
+}
+.showTab3{
+	width:30%;
+	float:left;
+	 
+}
+.showDeptName{
+	padding:5px;
+	font-weight:bold;
+	background:#E6E6E6;
+	color:#000;
+	/*border:1px solid #999;*/
+	}
+.searchTop{
+	width:49%;
+	padding:0;
+	}
+.searchTop ul{
+	padding:5px 0 5px 10px;
+	line-height:px;
+	margin:0;
+	list-style:none;
+	}
+.searchTop ul .searchTab0{
+	width:18%;
+	float:left;
+	 
+}
+.searchTop ul .searchTab1{
+	width:15%;
+	float:left;
+	 
+}
+.searchTop ul .searchTab2{
+	width:22%;
+	float:left;
+	 
+}
+.searchTop ul .searchTab3{
+	width:20%;
+	float:left;
+	 
+}
+.searchTop ul .searchTab4{
+	width:25%;
+	float:left;
+	 
+}
+.list{
+	border-bottom:1px solid #CCC;
+	}

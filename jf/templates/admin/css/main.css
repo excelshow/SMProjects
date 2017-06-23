@@ -1,0 +1,101 @@
+/*!
+ *  
+ *  
+ */
+ 
+body {
+	font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+	padding-top: 65px;
+	font-size: 14px;
+}
+.logo{
+	padding:10px 0 0 0;
+}
+.boxLine{
+	background-color: #fff;
+    border: 2px solid #e7e9ec;
+    border-radius: 6px;
+    color: inherit;
+    font-size: 13px;
+    line-height: 1.72222;
+    margin: 0 0 15px;
+    padding: 8px;
+}
+.headerLink a {
+	font-size: 12px;
+}
+.navbar-static-top {
+	margin-bottom: 0;
+}
+.navbar-static-top li a {
+	font-size: 14px;
+	font-weight: normal;
+}
+footer {
+	background-color: #FFF;
+	border-top: 2px solid #CCC;
+	color: #bac1c8;
+	font-size: 15px;
+	padding-top: 20px;
+	margin-top: 20px;
+}
+.backLogin .form-group{
+	margin-bottom: 10px;
+	}
+.backLogin label {
+	margin-bottom: 0;
+	 line-height: 1.5;
+	}
+.my-form{
+	padding:15px;
+}
+.modal-header {
+	background: #ecf0f1;
+}
+.modal-footer {
+	background: #ecf0f1;
+}
+.btnUpload {
+	position: relative;	 
+}
+.btnUpload-intput {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	border: solid transparent;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	cursor: pointer;
+}
+ 
+.modal-body{
+	padding:0;
+}
+.bootstrap-dialog .bootstrap-dialog-title{
+	font-size:26px;
+	padding:0;
+	margin:0;
+	font-weight:bold;
+}
+.bootstrap-dialog-header{
+	padding:0
+}
+ 
+.productNav{
+	margin:0;
+	padding: 0; 
+}
+.productNav li{
+	list-style:none;
+	font-size:14px;
+	
+	line-height:30px;
+	padding:5px 0;
+}
+ 
+ul.productTh{
+	margin:0;
+	padding: 0 0 10px 20px;
+	list-style:none;
+}

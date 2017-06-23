@@ -1,0 +1,4 @@
+﻿RewriteEngine on   
+RewriteCond $1 !^(index\.php|assets|captcha|attachments|robots\.txt)   
+#RewriteRule ^(.*)$ /ci/index.php/$1 [L]
+RewriteRule ^(.*)$ /index.php/$1 [L]

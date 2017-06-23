@@ -1,0 +1,88 @@
+.page {
+	overflow:hidden;
+	padding:0 auto;
+	margin:0 auto;
+	}
+.floatRight{
+	float:right;
+	}
+.floatLeft{
+	float:left;
+	}
+.topNav{
+	position:relative; 
+	width:970px;
+	margin:0 auto;
+	border:0 auto;
+	 
+	}
+.topNav .logo{
+	padding:10px 20px;
+	background: url(../images/logoBack.png);
+	}
+.topcontent{
+	padding:10px 30px;
+	background: url(../images/logoBack.png);
+	width:300px;
+	height:380px;
+	 
+}
+.topcontent ul{
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.topcontent ul li{
+	padding:10px 15px;
+	margin:0;
+	font-size:14px;
+	float:left;
+	list-style:none;
+}	
+	/* HEADER */
+#headerimgs{
+	min-width:970px;
+}
+.headerimg {
+	background-position: center top;
+	background-repeat: no-repeat;
+	width:100%;
+	min-width:970px;
+	height:400px;
+	position:absolute;
+}
+
+
+.buttom{
+ background-color: #069;  
+ padding:4px 10px; 
+ color:#FFF; 
+ font-size:14px; 
+	font-family:"微软雅黑";
+ border:none; 
+ cursor:pointer;
+}
+ 
+.login_txt{
+	padding:0;}
+.login_txt form{
+	padding:0;
+	margin:0;
+	}
+.login_txt .labelF{
+	font-size:14px;
+	display:inline-block;
+	width:60px;
+	}
+ 
+.inputbox{
+	padding:5px;
+	margin-top:5px;
+	border:0; 
+	font-size:14px;
+	width:140px;
+	border:1px solid #330;
+}
+.error {
+	color:#F00;	 
+}

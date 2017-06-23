@@ -1,0 +1,135 @@
+@charset "utf-8";
+/* CSS Document */ 
+.sms_top{
+	padding:10px 10px 0 10px;
+}
+.sms_menu{
+	 border-bottom:1px solid #666;
+	 list-style:none;
+	 padding:5px 0;
+	 margin:0;
+	 background:#F2F2F2;
+}
+.sms_menu li{
+	padding:0px;
+	float:left;
+}
+.sms_menu li a{
+	padding:4px 15px; 
+	font-size:14px;
+	color:#000;
+}
+.sms_menu li .curren{ 
+	background:#666;
+	font-size:14px;
+	color:#FFF;
+}
+.searchbox{ 
+	padding:20px 20px 5px 20px;
+	text-align:center;
+	}
+.searchNav{
+	margin:0 auto;
+	width:600px;
+	}
+.searchform{
+	border:1px solid #999;
+	background:#FFF;
+	padding:5px;
+	float:left;
+	text-align:left;
+	}
+.searchform .styleSelect{
+	font-family:微软雅黑, Verdana, Geneva, sans-serif;
+	font-size:14px;
+	border:0;
+	padding:5px;
+	}
+
+.searchform .styleInput{
+	font-family:微软雅黑, Verdana, Geneva, sans-serif;
+	font-size:14px;
+	border:0;
+	width:300px;
+	padding:5px;
+	}
+.searchButton{
+	text-align:left;
+	padding-left:2px;
+	float:left;
+}
+.searchButton .submitButton{
+	font-family:微软雅黑, Verdana, Geneva, sans-serif;
+	font-size:20px;
+	padding:5px 10px;
+	height:43px;
+	border:0;
+	background:#0099ff;
+	color:#FFF;
+}
+.searchButton .submitButton:hover{
+
+	background:#006699;
+	color:#FFF;
+}
+.ipShow{
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.ipShow li{
+	float:left;
+	width:12%;
+	font-size:12px;
+	height:80px;
+	padding:5px;
+	margin:5px;
+}
+.ipShow .useGray{
+	background:#F0F0F0;
+	border:1px solid #999;
+}
+.ipShow .useGreen{
+	background:#CAFFE4;
+	border:1px solid #5CC962;
+	color:#030;
+}
+.ipShow .useRed{
+	background:#FFDFDF;
+	border:1px solid #FF8080;
+}
+
+.ipShow .ipAddress{ 
+	font:bold 16px "Times New Roman", Times, serif;
+	height:26px;
+	width:100px;
+}
+.chuku_ul{
+	padding:0 10px 0 0;
+	margin:0;
+	}
+.chuku_ul li{
+	list-style:none;
+	font-size:14px;
+	width:100%;
+	}
+.chuku_ul li a{
+	padding:5px 10px;
+	display:inline-block;
+	width:98%;
+	}
+.chuku_ul li a:hover{
+	background:#FFF;
+	}
+.number_list{
+	padding:5px;
+	border:1px solid #CCC;
+	list-style:none;
+}
+.number_list li{
+	padding:5px;
+	background:#F7F7F7;
+	margin:2px;
+	float:left;
+	font-size:14px;
+}

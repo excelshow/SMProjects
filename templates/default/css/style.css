@@ -1,0 +1,72 @@
+/* =============================================================================
+
+	STYLE.CSS
+	version: 1.6
+	updated: 2009-03-06, 13:00 GMT+1
+
+============================================================================= */
+
+/* =============================================================================
+HTML - styles
+============================================================================= */
+
+ 
+.box {
+	min-height: 1px;
+}
+.box:after {
+	display: block;
+	visibility: hidden;
+	clear: both;
+	line-height: 0;
+	font-size: 0;
+	content: ".";
+}
+.fix {
+	float: none;
+	clear: both;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	line-height: 0;
+	font-size: 0;
+}
+.f-left {
+	float: left !important;
+}
+.f-right {
+	float: right !important;
+}
+.t-left {
+	text-align: left !important;
+}
+.t-center {
+	text-align: center !important;
+}
+.t-right {
+	text-align: right !important;
+}
+.t-justify {
+	text-align: justify !important;
+}
+.va-top {
+	vertical-align: top !important;
+}
+.va-middle {
+	vertical-align: middle !important;
+}
+.va-bottom {
+	vertical-align: bottom !important;
+}
+.leftmenu{
+	list-style:none;
+	padding:5px 10px;
+	margin:0;
+	}
+
+.leftmenu a{ 
+	padding:5px 10px;
+	display:inline-block;
+	}

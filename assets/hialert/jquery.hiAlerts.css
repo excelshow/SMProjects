@@ -1,0 +1,120 @@
+#popup_container {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	min-width: 300px; /* Dialog will be no smaller than this */
+	_width:320px; 
+	/*max-width: 600px; *//* Dialog will wrap after this width */
+	background: #fff;
+	 
+	border: solid 4px #666;
+	color: #000;
+/*	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;*/
+}
+
+
+/*corner style
+#ctl, #cbl, #ctr, #cbr { 
+position:absolute; width:5px; height:5px;  
+overflow:hidden; font-style:normal; z-index:99999;
+background:#fff url(/inc/hialert/corners.gif) no-repeat ;}
+#ctl {top:-1px; left:-1px;background-position:0 0;background-color:#FAF5CE;}
+#ctr {top:-1px; right:-1px;background-position:-5px 0;background-color:#FAF5CE;}
+#cbl {bottom:-1px; left:-1px;background-position:0 -5px;}
+#cbr {bottom:-1px; right:-1px;background-position:-5px -5px;}
+/*corner style over*/ 
+
+
+#popup_title {
+	font-size: 12px;
+	font-weight: bold;
+	text-align:left;
+	line-height: 1.9em;
+	color:#FFF;
+	background: #318E2B;
+	/*background:url(/inc/hialert/title.gif) top repeat-x;
+	border-bottom: solid 1px #777;*/
+	cursor: default;
+	padding:0 0 0 8px;
+	margin: 0em;
+}
+#popup_close{
+position:absolute;
+right:7px;
+top:2px;
+color:#FFF;
+font:14px bold  Arial, Helvetica, sans-serif;
+width:16px;
+height:16px;
+background: url(default/close.png) no-repeat;/**/
+cursor:hand;
+cursor:pointer;
+ 
+}
+#popup_close:hover{
+ 
+background:#006600 url(default/close.png) no-repeat;/**/
+cursor:hand; 
+
+}
+
+#popup_content {
+	background: 16px 16px no-repeat;
+	padding: 12px;
+	margin: 0em;
+}
+
+#popup_content.alert {
+	background-image: url(default/info.gif);
+}
+
+#popup_content.confirm {
+	background-image: url(default/confirm.png);
+}
+
+#popup_content.prompt {
+	background-image:  url(default/info.png);
+}
+
+#popup_message {
+	padding-left: 48px;
+	line-height:22px;
+}
+
+#popup_panel {
+	text-align: center;
+	margin: 1em 0em 0em 1em;
+}
+
+#popup_ok,#popup_cancel{
+font-family:微软雅黑,Verdana, Geneva, sans-serif;
+text-align:center;
+/*background:url(/inc/hialert/bot.gif) no-repeat ;*/
+font-size:14px;
+padding:0 0 2px 0; 
+border:2px solid #0072A8;
+background-color: #068ECE;
+color:#FFF;
+}
+
+#popup_prompt {
+	margin: .5em 0em;
+}
+
+#popup_content.openBox{padding:15px;background:none; }
+.openBox #popup_message{padding:0;overflow:auto;}
+
+#over_container{
+min-width: 300px; /* Dialog will be no smaller than this */
+background: #FFF9EE;
+border:2px solid #F60;
+color: #060;
+}
+#over_message{
+text-align:center; 
+padding:5px 20px;}
+
+#over_container.over_3{
+background:#FFF2F2;
+border:1px solid #FF8080;}

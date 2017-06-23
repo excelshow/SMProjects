@@ -1,0 +1,66 @@
+/*!
+ *  
+ *  
+ */
+ 
+body {
+    font-family:"Lato", sans-serif,Microsoft Yahei,Hiragino Sans GB,WenQuanYi Micro Hei;
+}
+p{
+	font-weight:100;
+	font-size:16px;
+	}
+small, .small {
+   
+    line-height: 2;
+	font-weight:100;
+}
+.lead{
+	margin-bottom:5px;
+	}
+.h10{
+	height:10px;
+	display:block;
+}
+.h15{
+	height:15px;
+	display:block;
+}
+.headerLink a{
+	font-size:12px;
+}
+.navbar-nav > li > a {
+     font-size: 20px;
+	 font-weight:100;
+}
+.navbar-static-top {
+	margin-bottom:0;
+	font-size: 16px;
+}
+.breadcrumb{
+	font-size:12px;
+}
+.page-header{
+	 margin:10px 0 10px;
+	 padding:0;
+	 
+}
+.page-header h4{
+	font-weight:400;
+	 
+}
+.shjg{
+	font-size:22px;
+	}
+.popover-content{
+	font-size:14px;
+	color:#900;
+	}
+footer{
+	padding:25px 0 10px 0;
+	color:#333; 
+	}
+.form-horizontal .has-feedback .form-control-feedback{
+	top: 0;
+	right: -25px
+}

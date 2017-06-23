@@ -1,0 +1,370 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Show extends CI_Controller {
+
+    function __construct() {
+        parent::__construct();
+        $this->load->model('login_model');
+        // $this->dx_auth->check_uri_permissions();
+        $this->load->model('staff_model');
+        $this->load->model('tongxun_model');
+        $this->sysconfig_model->sysInfo(); // set sysInfo
+        if ($this->session->userdata('userLogin')) {
+            $itname = $this->session->userdata('itname');
+            $staffInfo = $this->tongxun_model->get_staff_by("itname = '" . $itname . "'");
+            $this->session->set_userdata('cname', $staffInfo->cname);
+        }
+    }
+
+    function pagination($linkUrl, $linkNumber, $uri_segment, $condition = "") {
+        $this->load->library('pagination');
+        $config['base_url'] = site_url($linkUrl);
+        $config['total_rows'] = $linkNumber;
+        $config['per_page'] = 100;
+        $config['uri_segment'] = $uri_segment;
+        $this->pagination->initialize($config);
+        return $this->pagination->create_links();
+    }
+
+    function showConMenu() {
+        $showmenu = "";
+        return $showmenu;
+    }
+
+    function index() {
+        $this->publiclist();
+        exit();
+        // load all address
+        $id = $this->uri->segment(4, 0);
+        $search = $this->input->post('searchText');
+        if (!$id) {
+            $id = 0;
+        }
+        $deptAll = $this->tongxun_model->dept_get_all(0, 0, "root = 6");
+        //  print_r($dept);
+        $this->cismarty->assign('menuUrl', array('tongxun', 'index'));
+        $this->cismarty->assign("id", $id);
+        $this->cismarty->assign("deptList", $deptAll);
+        // $this->cismarty->assign("links", $data['links']); 
+        $this->cismarty->display($this->sysconfig_model->templates() . '/tongxun/show_index.tpl');
+    }
+
+    function show_my() {
+        if ($this->session->userdata('userLogin')) {
+            $itname = $this->session->userdata('itname');
+            $staffInfo = $this->tongxun_model->get_staff_by("itname = '" . $itname . "'");
+            $this->session->set_userdata('cname', $staffInfo->cname);
+            $this->load->model('deptsys_model');
+            $ouTemp = $this->deptsys_model->get_dept_parent_ou('id = ' . $staffInfo->rootid);
+            // print_r($ouTemp);
+            $this->session->set_userdata('deptName', $ouTemp[0]['deptName']);
+            $staffList = $this->show_stafflist($ouTemp[0]['deptId']);
+
+            //  print_r($data['staffs']);
+            // $this->load->view('staffLayout', $data);
+
+            $this->cismarty->assign("data", $staffList);
+
+            $this->cismarty->display($this->sysconfig_model->templates() . '/tongxun/show_mydept.tpl');
+        } else {
+            $this->cismarty->display($this->sysconfig_model->templates() . '/tongxun/show_login.tpl');
+        }
+    }
+
+    function myinfo() {
+        if ($this->session->userdata('userLogin')) {
+            $itname = $this->session->userdata('itname');
+            $staffList = $this->tongxun_model->staffs_addree_row("itname = '" . $itname . "'");
+            // print_r($staffList);
+            $this->cismarty->assign("addreeInfo", $staffList);
+
+            $this->cismarty->display($this->sysconfig_model->templates() . '/tongxun/show_myinfo.tpl');
+        } else {
+            $this->cismarty->display($this->sysconfig_model->templates() . '/tongxun/show_login.tpl');
+        }
+    }
+
+    function show_sreach() {
+        $type = trim($this->input->post('type'));
+        $search = trim($this->input->post('searchText'));
+        parse_str($_SERVER['QUERY_STRING'], $_GET);
+//echo $type;
+        if ($search) {
+            $this->load->model("deptsys_model");
+            if ($type == 2) {
+                $deptIdArr = $this->deptsys_model->get_dept_child_id("deptName like '%" . $search . "%'");
+                $where_in = $deptIdArr;
+            } else {
+                $where_in = '';
+            }
+            // print_r($result);
+            $where = "del_show = 0 and enabled = 1";
+            if ($type == 1) {
+                $where .= " and (itname like '%" . $search . "%' or cname like '%" . $search . "%')";
+            }
+            if ($type == 3) {
+                $wherea = "sa_tel like '%" . $search . "%' or sa_mobile like '%" . $search . "%'";
+                $tempa = $this->tongxun_model->staffs_addree_result($wherea);
+                $data['stafftemp'] = '';
+                foreach ($tempa as $row) {
+                    $data['stafftemp'][] = $this->tongxun_model->get_staffs_top("itname = '" . $row->itname . "'");
+                }
+            } else {
+                $data['stafftemp'] = $this->tongxun_model->get_staffs_where_in(0, 0, $where, $where_in);
+            }
+            //echo $where;
+            //print_r($data['staffs']); 
+            if ($data['stafftemp']) {
+                foreach ($data['stafftemp'] as $row) {
+
+                    $this->load->model("deptsys_model"); // load deptinfo
+                    $dept = $this->deptsys_model->get_dept_val("id = " . $row->rootid);
+                    if ($dept) {
+                        $ouTemp = $this->deptsys_model->get_dept_child_DN('id = ' . $row->rootid);
+                        if ($ouTemp) {
+                            $row->deptOu = implode("&raquo;", $ouTemp);
+                        } else {
+                            $row->deptOu = "";
+                        }
+                        $row->deptname = $dept->deptName;
+                    } else {
+                        $row->deptOu = "";
+                        $row->deptname = "暂无";
+                    }
+                    $addreeInfo = $this->tongxun_model->staffs_addree_row("itname = '" . $row->itname . "'");
+                    if ($addreeInfo) {
+                        $row->address = $addreeInfo;
+                    } else {
+                        $row->address = '';
+                    }
+                    $data['staffs'][] = $row;
+                }
+            } else {
+                $data['staffs'] = "";
+            }
+        } else {
+            $data['staffs'] = "";
+            $type = '';
+            $search = '';
+        }
+        // print_r($data['staffs']);
+        $this->cismarty->assign("data", $data['staffs']);
+        $this->cismarty->assign("type", $type);
+        $this->cismarty->assign("search", $search);
+        $this->cismarty->display($this->sysconfig_model->templates() . '/tongxun/show_search.tpl');
+    }
+
+    function oaurl() {
+        $itname = $this->uri->segment(4, 0);
+        //echo md5("lizhendong");
+        $staff = $this->staff_model->get_staffs('', '', '');
+        foreach ($staff as $row) {
+
+            if ($itname == md5($row->itname)) {
+                $this->session->set_userdata('userLogin', true);
+                $this->session->set_userdata('itname', $row->itname);
+                // $this->publiclist();
+                redirect(site_url('tongxun/show'));
+                break;
+            }
+        }
+        // print_r($staff);
+    }
+
+    function login() {
+        $itname = trim($this->input->post('username'));
+        $up = trim($this->input->post('password'));
+        $data = array($itname, $up);
+        // $data[] = 'lizd11';
+        if ($this->userLogin($data)) {
+            $this->session->set_userdata('userLogin', true);
+            $this->session->set_userdata('itname', $data[0]);
+            echo 'ok';
+        } else {
+            $this->session->sess_destroy();
+            echo 1;
+        }
+    }
+
+    function userLogin($data) {
+        // $this->load->library('adldaplibrary');
+        //  $adldap = new adLDAP();
+        $ldapconn = ldap_connect("10.90.18.5");        //连接ad服务
+        ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);    //设置参数
+        $ldap_bd = @ldap_bind($ldapconn, "AppSystem", "Semir@app");                    //打开ldap，正确则返回true。登陆
+        //  var_dump($ldap_bd);
+        if ($ldap_bd) {
+            $bd = @ldap_bind($ldapconn, $data[0] . '@semir.cn', $data[1]);
+            if ($bd) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+            ldap_close($ldapconn); //关闭
+        } else {
+            return FALSE;
+        }
+    }
+
+    function logout() {
+        $this->session->sess_destroy();
+        echo 'ok';
+//redirect(site_url(''));
+    }
+
+    function show_stafflist($id) {
+
+        //$id = $this->uri->segment(4, 0);
+        $search = $this->input->post('key');
+        if (!$id) {
+            $id = 6;
+        }
+        parse_str($_SERVER['QUERY_STRING'], $_GET);
+        $model = $this->load->model("deptsys_model");
+        $sqlStr = "id = " . $id;
+        $deptIdArr = $this->deptsys_model->get_dept_child_id($sqlStr);
+        $where_in = $deptIdArr;
+
+        // print_r($result);
+        $where = "del_show = 0 and enabled = 1";
+
+        if ($search) {
+            if ($id == 0) {
+                $where = "itname like '%" . $search . "%'";
+            } else {
+                $where .= " and itname like '%" . $search . "%'";
+            }
+        }
+        //echo $where;
+        $data['stafftemp'] = $this->tongxun_model->get_staffs_where_in(100, $this->uri->segment(5, 0), $where, $where_in);
+        $staffNumber = $this->tongxun_model->get_staffs_where_in('', '', $where, $where_in);
+        //print_r($data['staffs']);
+        // 读取用户AD状态
+        if ($data['stafftemp']) {
+            foreach ($data['stafftemp'] as $row) {
+                /* foreach ($result as $row) {
+                  $addreeInfo = $this->tongxun_model->staffs_addree_row("itname = '".$row->itname."'");
+
+                  }
+                 * 
+                 */
+                $this->load->model("deptsys_model"); // load deptinfo
+                $dept = $this->deptsys_model->get_dept_val("id = " . $row->rootid);
+                if ($dept) {
+                    $ouTemp = $this->deptsys_model->get_dept_child_DN('id = ' . $row->rootid);
+                    if ($ouTemp) {
+                        $row->deptOu = implode("&raquo;", $ouTemp);
+                    } else {
+                        $row->deptOu = "";
+                    }
+                    $row->deptname = $dept->deptName;
+                } else {
+                    $row->deptOu = "";
+                    $row->deptname = "暂无";
+                }
+                $addreeInfo = $this->tongxun_model->staffs_addree_row("itname = '" . $row->itname . "'");
+                if ($addreeInfo) {
+                    $row->address = $addreeInfo;
+                } else {
+                    $row->address = '';
+                }
+                $data['staffs'][] = $row;
+            }
+        } else {
+            $data['staffs'] = "";
+        }
+        // print_r($data['staffs']);
+        return $data['staffs'];
+    }
+
+    function publiclist() {
+        //echo "sdf";
+
+        $deptAll = $this->tongxun_model->dept_get_all(0, 0, "root = 6");
+        //  print_r($dept);
+        // echo md5('123123');
+        $this->cismarty->assign("deptList", $deptAll);
+        $data = $this->tongxun_model->publicResult();
+        $this->cismarty->assign("data", $data);
+        $this->cismarty->display($this->sysconfig_model->templates() . '/tongxun/show_publiclist.tpl');
+    }
+
+    function cut_str($string, $sublen, $start = 0, $code = 'UTF-8') {
+        if ($code == 'UTF-8') {
+            $pa = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/";
+            preg_match_all($pa, $string, $t_string);
+
+            if (count($t_string[0]) - $start > $sublen)
+                return join('', array_slice($t_string[0], $start, $sublen)) . "";
+            return join('', array_slice($t_string[0], $start, $sublen));
+        }
+        else {
+            $start = $start * 2;
+            $sublen = $sublen * 2;
+            $strlen = strlen($string);
+            $tmpstr = '';
+
+            for ($i = 0; $i < $strlen; $i++) {
+                if ($i >= $start && $i < ($start + $sublen)) {
+                    if (ord(substr($string, $i, 1)) > 129) {
+                        $tmpstr.= substr($string, $i, 2);
+                    } else {
+                        $tmpstr.= substr($string, $i, 1);
+                    }
+                }
+                if (ord(substr($string, $i, 1)) > 129)
+                    $i++;
+            }
+            if (strlen($tmpstr) < $strlen)
+                $tmpstr.= "...";
+            return $tmpstr;
+        }
+    }
+
+    function staffmodifycomplete() {
+        if ($this->session->userdata('userLogin')) {
+            $data['itname'] = $this->session->userdata('itname');
+            $addreeInfo = $this->tongxun_model->staffs_addree_row("itname = '" . $data['itname'] . "'");
+            if ($addreeInfo) {
+                $data['sa_code'] = $this->input->post('sa_code');
+                $data['sa_tel'] = $this->input->post('sa_tel');
+                $data['sa_tel_short'] = $this->input->post('sa_tel_short');
+                $data['sa_mobile'] = $this->input->post('sa_mobile');
+                $data['sa_email'] = $this->input->post('sa_email');
+                $data['sa_uptime'] = date('Y-m-d h:i:s');
+                $this->tongxun_model->edit_address($data);
+                // log
+
+                $data['cname'] = $this->session->userdata('cname'); 
+                $this->tongxun_model->insert_address_log($data);
+                echo 'ok';
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    function get_staff_id() {
+        $data = array();
+        foreach ($_POST as $key => $v)
+            $data[$key] = $v;
+        if ($this->input->post('is_verified'))
+            array_pop($data);
+        if ($this->input->post('class_id'))
+            array_pop($data);
+        if ($this->input->post('recover'))
+            array_pop($data);
+        if ($this->input->post('submit'))
+            array_pop($data);
+        if (count($data)) {
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+}

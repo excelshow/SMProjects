@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* CSS Document */
+
+img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+ 
+/******** HTMLLOADER url(../images/page_back.jpg) no-repeat center********/
+.QOverlay {
+	background:#CDB668;
+	z-index: 9999;
+	margin:0;
+	border:0;
+}
+.Qcenter{
+	width:1011px;
+	height:789px;
+	margin:0 auto;
+	border:0 auto;
+	background:url(/assets/images/page_back.jpg) no-repeat;
+	}
+.QLoader { /*  load 条效果 */
+	/*background:#666 url(../images/page_back.jpg);
+	height: 20px;
+	width:20px;*/
+}
+/******** CONTAINER ********/
