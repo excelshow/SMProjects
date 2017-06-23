@@ -11,7 +11,7 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://10.90.18.23/";
+$config['base_url']	= "http://localhost:8088/";
 
 // lizd add 201152
 // function  to system/libraries/config.php 
